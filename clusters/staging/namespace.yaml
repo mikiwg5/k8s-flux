@@ -1,6 +1,0 @@
-# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: www
