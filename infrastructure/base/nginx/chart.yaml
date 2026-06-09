@@ -13,4 +13,4 @@ spec:
   sourceRef:
     kind: HelmRepository
     name: nginx
-    namespace: nginx
+
