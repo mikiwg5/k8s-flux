@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: harbor.local/demo/nginx:1.0
+          image: localhost:8443/demo/nginx:1.0
           ports:
             - containerPort: 80
           securityContext:
