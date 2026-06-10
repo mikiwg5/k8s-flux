@@ -20,20 +20,19 @@ spec:
 
   values:
     expose:
-      type: clusterIP
+      type: nodePort
 
       tls:
-        enabled: true
+        enabled: false   # IMPORTANT: avoids certificate + DNS issues
         certSource: auto
-        auto:
-          commonName: harbor.local
 
-    externalURL: https://harbor.local
+    # IMPORTANT: remove fake DNS dependency
+    externalURL: http://100.100.2.69:31399
+
+    harborAdminPassword: "Harbor12345"
 
     persistence:
       enabled: false
-
-    harborAdminPassword: "Harbor12345"
 
     trivy:
       enabled: true
