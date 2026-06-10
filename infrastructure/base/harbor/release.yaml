@@ -22,12 +22,10 @@ spec:
     expose:
       type: clusterIP
       tls:
-        enabled: true
-        certSource: auto
-        auto:
-          commonName: harbor-harbor-core.harbor.svc.cluster.local
+        enabled: false  # Disable TLS for simpler access
+      # Remove certSource and auto section
 
-    externalURL: https://harbor-harbor-core.harbor.svc.cluster.local
+    externalURL: http://localhost:8443  # Match your port-forward
 
     persistence:
       enabled: false
@@ -43,6 +41,5 @@ spec:
     redis:
       type: internal
       
-    # Disable notary as it's not needed for basic setup
     notary:
       enabled: false
