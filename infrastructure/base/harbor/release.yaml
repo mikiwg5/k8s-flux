@@ -20,15 +20,14 @@ spec:
 
   values:
     expose:
-      type: nodePort
-
+      type: clusterIP
       tls:
         enabled: true
         certSource: auto
         auto:
-          commonName: 100.100.2.69   # IMPORTANT: must match reachable IP
+          commonName: harbor-harbor-core.harbor.svc.cluster.local
 
-    externalURL: https://100.100.2.69:30443
+    externalURL: https://harbor-harbor-core.harbor.svc.cluster.local
 
     persistence:
       enabled: false
@@ -43,3 +42,7 @@ spec:
 
     redis:
       type: internal
+      
+    # Disable notary as it's not needed for basic setup
+    notary:
+      enabled: false
