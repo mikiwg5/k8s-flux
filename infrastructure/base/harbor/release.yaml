@@ -22,15 +22,21 @@ spec:
     expose:
       type: clusterIP
 
-    externalURL: http://harbor.local
+      tls:
+        enabled: true
+        certSource: auto
+        auto:
+          commonName: harbor.local
+
+    externalURL: https://harbor.local
 
     persistence:
       enabled: false
 
+    harborAdminPassword: "Harbor12345"
+
     trivy:
       enabled: true
-
-    harborAdminPassword: "Harbor12345"
 
     database:
       type: internal
