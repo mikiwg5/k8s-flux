@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-demo
+  namespace: default
+  labels:
+    app: busybox-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-demo
+  template:
+    metadata:
+      labels:
+        app: busybox-demo
+    spec:
+      imagePullSecrets:
+      - name: harbor-creds
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: busybox
+        image: 100.100.2.75:30443/demo/busybox:latest
+        imagePullPolicy: Always
+        command:
+        - sh
+        - -c
+        - echo "BusyBox from Harbor is running!" && sleep 3600
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
