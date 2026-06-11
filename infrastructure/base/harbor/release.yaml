@@ -3,10 +3,8 @@ kind: HelmRelease
 metadata:
   name: harbor
   namespace: harbor
-
 spec:
   interval: 1h
-
   chart:
     spec:
       chart: harbor
@@ -15,31 +13,24 @@ spec:
         kind: HelmRepository
         name: harbor
         namespace: harbor
-
   targetNamespace: harbor
-
   values:
     expose:
       type: clusterIP
       tls:
-        enabled: false  # Disable TLS for simpler access
-      # Remove certSource and auto section
-
-    externalURL: http://localhost:8443  # Match your port-forward
-
+        enabled: true  # Change to true
+        certSource: auto
+        auto:
+          commonName: harbor-harbor-core.harbor.svc.cluster.local
+    externalURL: https://harbor-harbor-core.harbor.svc.cluster.local  # Change to HTTPS
     persistence:
       enabled: false
-
     harborAdminPassword: "Harbor12345"
-
     trivy:
       enabled: true
-
     database:
       type: internal
-
     redis:
       type: internal
-      
     notary:
-      enabled: false
+      enabled: false 
