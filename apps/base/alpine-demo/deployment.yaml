@@ -18,7 +18,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: alpine
-        image: harbor-harbor-core.harbor.svc.cluster.local/demo/alpine:latest
+        image: http://harbor-harbor-core.harbor.svc.cluster.local/demo/alpine:latest
         command: 
         - sh
         - -c
