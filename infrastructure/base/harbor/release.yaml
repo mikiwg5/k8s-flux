@@ -3,8 +3,10 @@ kind: HelmRelease
 metadata:
   name: harbor
   namespace: harbor
+ 
 spec:
   interval: 1h
+ 
   chart:
     spec:
       chart: harbor
@@ -13,18 +15,23 @@ spec:
         kind: HelmRepository
         name: harbor
         namespace: harbor
+ 
   targetNamespace: harbor
+ 
   values:
     expose:
-      type: nodePort          # <-- change from clusterIP to nodePort
+      type: nodePort
       tls:
-        enabled: false
+        enabled: true
+        certSource: auto
       nodePort:
         ports:
           http:
-            nodePort: 30080   # pick any free port 30000-32767
+            nodePort: 30080
+          https:
+            nodePort: 30443
  
-    externalURL: http://100.100.2.75:30080   # use any node IP
+    externalURL: https://100.100.2.75:30443
  
     persistence:
       enabled: false
