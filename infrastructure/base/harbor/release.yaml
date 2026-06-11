@@ -16,21 +16,29 @@ spec:
   targetNamespace: harbor
   values:
     expose:
-      type: clusterIP
+      type: nodePort          # <-- change from clusterIP to nodePort
       tls:
-        enabled: true  # Change to true
-        certSource: auto
-        auto:
-          commonName: harbor-harbor-core.harbor.svc.cluster.local
-    externalURL: https://harbor-harbor-core.harbor.svc.cluster.local  # Change to HTTPS
+        enabled: false
+      nodePort:
+        ports:
+          http:
+            nodePort: 30080   # pick any free port 30000-32767
+ 
+    externalURL: http://100.100.2.75:30080   # use any node IP
+ 
     persistence:
       enabled: false
+ 
     harborAdminPassword: "Harbor12345"
+ 
     trivy:
       enabled: true
+ 
     database:
       type: internal
+ 
     redis:
       type: internal
+ 
     notary:
-      enabled: false 
+      enabled: false
