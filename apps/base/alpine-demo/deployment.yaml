@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: alpine-demo
   namespace: default
+  labels:
+    app: alpine-demo
 spec:
   replicas: 1
   selector:
@@ -14,11 +16,13 @@ spec:
         app: alpine-demo
     spec:
       securityContext:
+        runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
       containers:
       - name: alpine
-        image: 10.109.234.52/demo/alpine:latest
+        image: harbor-harbor-core.harbor.svc.cluster.local:80/demo/alpine:latest
+        imagePullPolicy: Always
         command: 
         - sh
         - -c
