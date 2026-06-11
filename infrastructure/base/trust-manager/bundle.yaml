@@ -11,5 +11,4 @@ spec:
   target:
     configMap:
       key: ca-bundle.crt
-    namespaceSelector:
-      matchLabels: {}
+    namespaceSelector: {}  # Empty object targets all namespaces
