@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine-demo
+  namespace: default
+  labels:
+    app: alpine-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alpine-demo
+  template:
+    metadata:
+      labels:
+        app: alpine-demo
+    spec:
+      containers:
+      - name: alpine
+        image: localhost:8443/demo/alpine:latest
+        command: 
+        - sh
+        - -c
+        - echo "Alpine from Harbor is running!" && sleep 3600
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000

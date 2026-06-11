@@ -1,3 +1,4 @@
 resources:
   - namespace.yaml
   - nginx-demo/deployment.yaml
+  - alpine-demo/deployment.yaml
