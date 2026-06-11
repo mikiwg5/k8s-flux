@@ -1,19 +1,43 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: trust-manager
-  namespace: cert-manager
+  name: harbor
+  namespace: harbor
 spec:
   interval: 1h
   chart:
     spec:
-      chart: trust-manager
-      version: "0.12.0"
+      chart: harbor
+      version: "1.19.0"
       sourceRef:
         kind: HelmRepository
-        name: jetstack
-        namespace: cert-manager
+        name: harbor
+        namespace: harbor
+  targetNamespace: harbor
   values:
-    app:
-      trust:
-        namespace: cert-manager
+    expose:
+      type: nodePort
+      tls:
+        enabled: true
+        certSource: secret
+        secret:
+          secretName: harbor-ca-secret
+          notarySecretName: harbor-ca-secret
+      nodePort:
+        ports:
+          http:
+            nodePort: 30080
+          https:
+            nodePort: 30443
+    externalURL: https://100.100.2.75:30443
+    persistence:
+      enabled: false
+    harborAdminPassword: "Harbor12345"
+    trivy:
+      enabled: true
+    database:
+      type: internal
+    redis:
+      type: internal
+    notary:
+      enabled: false
