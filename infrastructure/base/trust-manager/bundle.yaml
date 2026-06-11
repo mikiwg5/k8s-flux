@@ -2,6 +2,7 @@ apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
   name: harbor-ca-bundle
+  namespace: harbor
 spec:
   sources:
   - secret:
@@ -11,5 +12,4 @@ spec:
     configMap:
       key: ca-bundle.crt
     namespaceSelector:
-      matchLabels:
-        kubernetes.io/metadata.name: harbor
+      matchLabels: {}
