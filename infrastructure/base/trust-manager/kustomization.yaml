@@ -9,4 +9,10 @@ resources:
 - repository.yaml
 
 - release.yaml
+
+- clusterissuer.yaml
+
+- certificate.yaml
+
+- bundle.yaml
  
