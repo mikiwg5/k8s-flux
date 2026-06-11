@@ -3,10 +3,8 @@ kind: HelmRelease
 metadata:
   name: harbor
   namespace: harbor
- 
 spec:
   interval: 1h
- 
   chart:
     spec:
       chart: harbor
@@ -15,37 +13,30 @@ spec:
         kind: HelmRepository
         name: harbor
         namespace: harbor
- 
   targetNamespace: harbor
- 
   values:
     expose:
       type: nodePort
       tls:
         enabled: true
         certSource: auto
+        auto:
+          commonName: "100.100.2.75"
       nodePort:
         ports:
           http:
             nodePort: 30080
           https:
             nodePort: 30443
- 
     externalURL: https://100.100.2.75:30443
- 
     persistence:
       enabled: false
- 
     harborAdminPassword: "Harbor12345"
- 
     trivy:
       enabled: true
- 
     database:
       type: internal
- 
     redis:
       type: internal
- 
     notary:
       enabled: false
