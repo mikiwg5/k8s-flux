@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sample-chart
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: my-sample-chart  # Your chart name in Harbor
+      version: "0.1.0"        # Your chart version
+      sourceRef:
+        kind: HelmRepository
+        name: sample-chart
+        namespace: flux-system
+      interval: 1m
+  values:
+    replicaCount: 1
+    image:
+      repository: 100.100.2.75:30443/demo/my-app  # Your app image in Harbor
+      tag: "1.0.0"
+      pullPolicy: Always
+    service:
+      type: ClusterIP
+      port: 80

@@ -1,0 +1,26 @@
+# values.yaml
+name: sample-chart
+namespace: default
+replicaCount: 1
+
+image:
+  repository: 100.100.2.75:30443/demo/alpine
+  tag: latest
+  pullPolicy: Always
+
+command: "echo 'Sample Helm Chart is running!' && sleep 30"
+runAsUser: 1000
+
+imagePullSecrets:
+  - name: harbor-creds
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+service:
+  enabled: false

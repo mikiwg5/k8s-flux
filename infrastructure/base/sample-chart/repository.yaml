@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: sample-chart
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://100.100.2.75:30443/charts  # Harbor OCI registry
+  secretRef:
+    name: harbor-creds  # Use your Harbor credentials
+    

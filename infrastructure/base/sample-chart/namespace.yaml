@@ -1,0 +1,5 @@
+# infrastructure/base/sample-chart/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sample-chart
